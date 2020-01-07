@@ -1,4 +1,4 @@
 # javademo
 
 ## 关于Java的学习过程
-## idea pull 测试
+## git pull 测试
