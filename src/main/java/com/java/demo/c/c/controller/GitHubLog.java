@@ -29,11 +29,10 @@ public class GitHubLog{
         access_token = new HttpPOST().post("https://github.com/login/oauth/access_token" , JSON.toJSONString(githubDto));
     }
 
-    public void GitHttpGet() throws IOException {
+    public GithubUserDto GitHttpGet() throws IOException {
         access_token =  access_token.split("=")[1].split("&")[0];
         String y = new HttpGet().run("https://api.github.com/user?access_token=" + access_token);
-        GithubUserDto githubUserDto = JSON.parseObject(y,GithubUserDto.class);
-        System.out.println(githubUserDto.getId());
+        return JSON.parseObject(y,GithubUserDto.class);
     }
 
 }

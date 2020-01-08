@@ -3,6 +3,15 @@ package com.java.demo.c.c.Dto;
 public class GithubUserDto {
     private String name;
     private String id;
+    private String usre;
+
+    public String getUsre() {
+        return usre;
+    }
+
+    public void setUsre(String usre) {
+        this.usre = usre;
+    }
 
     public String getId() {
         return id;
