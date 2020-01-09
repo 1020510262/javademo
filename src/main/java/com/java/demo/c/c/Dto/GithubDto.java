@@ -1,5 +1,7 @@
 package com.java.demo.c.c.Dto;
 
+import org.springframework.stereotype.Component;
+
 //Github数据交换类-OAuth
 //用于登陆Github，接受Github的一些参数。
 public class GithubDto {

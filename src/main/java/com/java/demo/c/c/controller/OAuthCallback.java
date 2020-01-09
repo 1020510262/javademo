@@ -19,10 +19,8 @@ public class OAuthCallback {
         gitHubLog.GitHttpPost(code);
         GithubUserDto githubUserDto = gitHubLog.GitHttpGet();
         if (githubUserDto == null){
-            System.out.println("未登录");
             return "redirect:/";
         }else {
-            System.out.println("登录成功");
             request.getSession().setAttribute("user" , githubUserDto);
             return "redirect:/";
         }
