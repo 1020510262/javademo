@@ -1,16 +1,21 @@
 package com.java.demo.c.c.controller;
 
 import com.java.demo.c.c.Dto.GithubUserDto;
+import com.java.demo.c.c.Mapper.UserMapper;
+import com.java.demo.c.c.Model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
+import java.util.UUID;
 
 @Controller
 public class OAuthCallback {
+    @Autowired
+    private UserMapper um;
 
     @GetMapping("/callback")
     public String callback(@RequestParam(name="code") String code,
@@ -22,6 +27,15 @@ public class OAuthCallback {
             return "redirect:/";
         }else {
             request.getSession().setAttribute("user" , githubUserDto);
+            User user = new User();
+            user.setUser_name(githubUserDto.getName());
+            user.setUser(githubUserDto.getId());
+            user.setUser_name(githubUserDto.getlogin());
+            user.setName(githubUserDto.getName());
+            user.setChange(new Date());
+            user.setCreate(new Date());
+            user.setSession(UUID.randomUUID().toString());
+            um.insert(user);
             return "redirect:/";
         }
     }

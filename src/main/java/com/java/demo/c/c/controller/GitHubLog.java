@@ -3,30 +3,17 @@ package com.java.demo.c.c.controller;
 import com.alibaba.fastjson.JSON;
 import com.java.demo.c.c.Dto.GithubDto;
 import com.java.demo.c.c.Dto.GithubUserDto;
-import com.java.demo.c.c.Log.MyConfig;
 import com.java.demo.c.c.ThirdPartySupport.HttpGet;
 import com.java.demo.c.c.ThirdPartySupport.HttpPOST;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Indexed;
 
 import java.io.IOException;
 
 //用于处理Git登陆过程的值传递
 public class GitHubLog{
     private String access_token;
-
-    @Autowired
-    private MyConfig myConfig;
-
-    @Value("${github.Client.id}")
-    private String Clientid;
-    @Value("${github.Client.secret}")
-    private String Clientsecret;
-    @Value("${github.url}")
-    private String url;
 
     public void GitHttpPost(String code) throws IOException {
         GithubDto githubDto = new GithubDto();
@@ -36,7 +23,6 @@ public class GitHubLog{
         githubDto.setRedirect_uri("http://localhost:8080/callback");
         githubDto.setState("1");
         access_token = new HttpPOST().post("https://github.com/login/oauth/access_token" , JSON.toJSONString(githubDto));
-        System.out.println(url);
     }
 
     public GithubUserDto GitHttpGet() throws IOException {

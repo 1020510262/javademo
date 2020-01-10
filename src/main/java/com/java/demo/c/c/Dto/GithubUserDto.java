@@ -3,14 +3,14 @@ package com.java.demo.c.c.Dto;
 public class GithubUserDto {
     private String name;
     private String id;
-    private String usre;
+    private String login;
 
-    public String getUsre() {
-        return usre;
+    public String getlogin() {
+        return login;
     }
 
-    public void setUsre(String usre) {
-        this.usre = usre;
+    public void setlogin(String user) {
+        this.login = user;
     }
 
     public String getId() {
