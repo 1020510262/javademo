@@ -58,4 +58,16 @@ public class User {
     public void setChange(Date change) {
         this.change = change;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "User='" + User + '\'' +
+                ", User_name='" + User_name + '\'' +
+                ", Name='" + Name + '\'' +
+                ", session='" + session + '\'' +
+                ", create=" + create +
+                ", change=" + change +
+                '}';
+    }
 }
