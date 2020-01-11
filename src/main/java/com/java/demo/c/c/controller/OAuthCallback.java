@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Controller
 public class OAuthCallback {
-    @Autowired
+    @Autowired(required = false)
     private UserMapper um;
 
     @GetMapping("/callback")
