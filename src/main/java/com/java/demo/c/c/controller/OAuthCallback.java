@@ -29,9 +29,9 @@ public class OAuthCallback {
             return "redirect:/";
         }else {
             request.getSession().setAttribute("user" , githubUserDto);
-           if (um.select("36914246") != null){
-               if (um.select("36914246").equals(githubUserDto.getlogin())){
-                   System.out.println("该用户已存在。");
+           if (um.select(githubUserDto.getId()) != null){//检测数据库中User表中是否拥有该用户，避免重复写入数据。
+               if (um.select(githubUserDto.getId()).equals(githubUserDto.getlogin())){
+
                }else {
                    System.out.println("错误");
                }
@@ -48,5 +48,9 @@ public class OAuthCallback {
            }
             return "redirect:/";
         }
+    }
+    @GetMapping("/problem")
+    public String problem(){
+        return "problem";
     }
 }
