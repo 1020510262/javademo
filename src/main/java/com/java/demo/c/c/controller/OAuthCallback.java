@@ -49,8 +49,8 @@ public class OAuthCallback {
             return "redirect:/";
         }
     }
-    @GetMapping("/problem")
+    @GetMapping("/publish")
     public String problem(){
-        return "problem";
+        return "publish";
     }
 }
