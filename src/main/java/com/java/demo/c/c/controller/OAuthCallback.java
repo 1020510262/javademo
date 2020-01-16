@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +24,8 @@ public class OAuthCallback {
 
     @GetMapping("/callback")
     public String callback(@RequestParam(name="code") String code,
-                           HttpServletRequest request) throws IOException {
+                           HttpServletRequest request,
+                           HttpServletResponse rgs) throws IOException {
         GitHubLog gitHubLog = new GitHubLog();
         gitHubLog.GitHttpPost(code);
         GithubUserDto githubUserDto = gitHubLog.GitHttpGet();
@@ -37,13 +41,15 @@ public class OAuthCallback {
                }
            }else {
                User user = new User();
+               String token = UUID.randomUUID().toString();
+               rgs.addCookie(new Cookie("token" , token));
                user.setUser_name(githubUserDto.getName());
                user.setUser(githubUserDto.getId());
                user.setUser_name(githubUserDto.getlogin());
                user.setName(githubUserDto.getName());
                user.setChange(new Date());
                user.setCreate(new Date());
-               user.setSession(UUID.randomUUID().toString());
+               user.setSession(token);
                um.insert(user);
            }
             return "redirect:/";

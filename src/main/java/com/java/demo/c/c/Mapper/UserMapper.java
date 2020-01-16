@@ -18,4 +18,6 @@ public interface UserMapper {
     @Select("select User_name from github_user where User = #{user}")
     String select(@Param("user") String user);
 
+
+
 }
