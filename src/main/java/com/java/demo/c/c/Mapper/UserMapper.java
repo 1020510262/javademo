@@ -15,8 +15,8 @@ public interface UserMapper {
             "values (#{User},#{User_name},#{session},#{create},#{change})")
     void insert(User user);
 
-    @Select("select User_name from github_user where User = #{user}")
-    String select(@Param("user") String user);
+    @Select("select User_name from github_user where session = #{session}")
+    String select(@Param("session") String session);
 
 
 
