@@ -22,7 +22,6 @@ public class OAuthCallback {
     @Autowired(required = false)
     private UserMapper um;
 
-    private String coo;
 
     @GetMapping("/callback")
     public String callback(@RequestParam(name="code") String code,
@@ -35,14 +34,8 @@ public class OAuthCallback {
             return "redirect:/";
         }else {
             request.getSession().setAttribute("user" , githubUserDto);
-            Cookie[] cookies = request.getCookies();
-            for ( Cookie c : cookies ){
-                if (c.getName().equals("token")){
-                    coo = c.getValue();
-                }
-            }
-           if (coo != null){//检测数据库中User表中是否拥有该用户，避免重复写入数据。
-               if (um.select(coo).equals(githubUserDto.getlogin())){
+           if (um.select(githubUserDto.getId()) != null){//检测数据库中User表中是否拥有该用户，避免重复写入数据。
+               if (um.select(githubUserDto.getId()).equals(githubUserDto.getlogin())){
                }else {
                    System.out.println("错误");
                }
