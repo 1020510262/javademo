@@ -36,7 +36,7 @@ public class OAuthCallback {
             request.getSession().setAttribute("user" , githubUserDto);
            if (um.select(githubUserDto.getId()) != null){//检测数据库中User表中是否拥有该用户，避免重复写入数据。
                if (um.select(githubUserDto.getId()).equals(githubUserDto.getlogin())){
-                   rgs.addCookie(new Cookie("token" , um.selecttoken(githubUserDto.getId())));//当为系统中存在的用户时读取token，并写入Cookie中。
+                   //rgs.addCookie(new Cookie("token" , um.selecttoken(githubUserDto.getId())));//当为系统中存在的用户时读取token，并写入Cookie中。
                }else {
                    System.out.println("错误");
                }
