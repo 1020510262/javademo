@@ -22,6 +22,9 @@ public interface UserMapper {
     User selectsession(@Param("session") String session);
 
 
+    @Select("select session from github_user where user = #{user}")
+    String selecttoken(@Param("user") String user);
+
 
 
 }
